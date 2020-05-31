@@ -7,8 +7,8 @@ setuptools.setup(
     version="0.0.1",
     author="Alessandro Puzielli aka alepuzio",
     author_email="alessandro.puzielli@alepuzio.net",
-    long_description = 
-    description = "My software to build a report of file inside a directory",
+    description="My software to build a report of file inside a directory",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/alepuzio/listfiles",
     packages=setuptools.find_packages(),
