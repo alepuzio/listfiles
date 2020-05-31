@@ -17,6 +17,7 @@ class App:
         self.directory = newdirectory;
 
     def printdata(self):
+        ''' for debug '''
         print("main: ");
         print(str(self.directory));
 
