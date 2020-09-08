@@ -8,6 +8,7 @@ import message
 from SingleFile import SingleFile
 
 from rootpath import Rootpath
+from report import Report
 from report_name import ReportName
 
 def main():
@@ -15,11 +16,9 @@ def main():
     print(message.ARGUMENTS + str(opts))
 
     rootpath = Rootpath(opts)
-    reportname = ReportName(opts).name()
 
     read_files = readdirectory(rootpath)
-    #TODO flag -d :find duplicates
-    read_files.sort()
+    #read_files.sort()
     unique_read_files = []
     duplicated_read_files = []
     for file_tmp in read_files:
@@ -29,7 +28,11 @@ def main():
         else:
             unique_read_files.append ( file_tmp)
 
+    duplicated = Report ( ReportName().duplicated() , duplicated_read_files)
+    duplicated.write()
 
+    unique = Report ( ReportName().unique() , unique_read_files )
+    unique.write()
 
 def readdirectory(rootpath): #TODO move in class Rootpath
     """
@@ -57,8 +60,7 @@ def walkdir(root_path,  readfiles ):
     for root, dirs, files in os.walk(root_path):
         path = root.split(os.sep)
         for file1 in files:
-            row = SingleFile(file1, os.sep.join(path))
-            readfiles.append(row.tocsv)
+            readfiles.append ( SingleFile ( file1, os.sep.join ( path ) ) )
         for directory in dirs:
             walkdir(directory, readfiles)
 

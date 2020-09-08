@@ -22,7 +22,7 @@ class SingleFile:
         self.dimension = statinfo.st_size
         filetmp.close()
 
-    @property
+    #@property
     def tocsv(self):#TODO cosa fa questa annotation
         separator_file = settings.DEFAULT_SEPARATOR
         nome = str(self.name)+separator_file+str(self.directory)+separator_file+str(self.extension)+separator_file+str(self.dimension)+separator_file\
@@ -31,3 +31,8 @@ class SingleFile:
 
     def filename(self):
         return self.name
+
+    ''' 
+    def __eq__(self, other):
+        return "{0}{1}{2}"
+        '''

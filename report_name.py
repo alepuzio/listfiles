@@ -5,11 +5,15 @@ import settings
 
 class ReportName:
 
-    def __init__(self, opts):
-        self.name1 = opts
+    def __init__(self):
+        self.extension = "csv"
 
-    def name(self):
+    def unique(self):
         '''@return the name of final report file'''
-        return "{0}{1}{2}".format(settings.NAME_REPORT_FILE, datetime.datetime.now().strftime(settings.DATE_FORMAT), settings.EXTENSION_FINAL_FILE)
+        return "{0}{1}.{2}".format("unique", datetime.datetime.now().strftime(settings.DATE_FORMAT), self.extension )
 
+
+    def duplicated(self):
+        '''@return the name of final report file'''
+        return "{0}{1}.{2}".format("duplicated", datetime.datetime.now().strftime(settings.DATE_FORMAT), self.extension )
 

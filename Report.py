@@ -10,26 +10,21 @@ from rootpath import Rootpath
 
 
 
-class Report(opts):
+class Report:
     """
     """
 
-    def __init__(self, new_name, new_list_files):
-        self.name = new_name
+    def __init__(self, new_report_name, new_list_files):
+        self.name = new_report_name
         self.list_files = new_list_files
-
-    def name(self):#TODO move in another class
-        if opts.__len__() > Position.REPORT_NAME:
-            reportname = opts[Position.REPORT_NAME]
-        else:
-            reportname = settings.NAME_REPORT_FILE + datetime.datetime.now().strftime(settings.DATE_FORMAT) + settings.EXTENSION_FINAL_FILE
-        return reportname
 
     def homonym(self):
         if (os.path.exists(reportname)):
-        os.remove(reportname)
+            os.remove(reportname)
+        else:
+            pass
 
-    def reportrectory(rootpath, extension, reportname, separator):
+    def write(self):
         """
             It read a directory recursavely
             ----------
@@ -49,28 +44,25 @@ class Report(opts):
             #create file
             report = open(self.name, settings.AUTHORIZATION_FILE)
             report.write(self.tocsvLabel())
-            self.writerows(readfiles, report)
+            self.writerows( self.list_files, report)
             report.close()
         except:
             print (  sys.exc_info()  )
         print (message.END_EXECUTION )
 
 
-def tocsvLabel():
-    """
-        It return the summary of CSV file
-    """
-    return settings.SUMMARY_FINAL_FILE
+    def tocsvLabel(self):
+        '''@return the summary of CSV file
+        '''
+        return settings.SUMMARY_FINAL_FILE
 
-def writerows (readfiles, report):
-    """
-        It writes the elements of list of file in target file
-        ----------
-        readfiles: list
-            list of SingleFile in csv form
-        report: file
-            final file of report
-    """
-    for file1 in readfiles:
-        report.write(file1)
-    print(message.END_WRITING_FILE)
+    def writerows (self, readfiles, report):
+        """
+            It writes the elements of list of file in target file
+            ----------
+            readfiles: list    list of SingleFile in csv form
+            report: file        final file of report
+        """
+        for file1 in readfiles:
+            report.write(file1.tocsv())
+        print(message.END_WRITING_FILE)
