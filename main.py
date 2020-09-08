@@ -20,7 +20,7 @@ def main():
     read_files = readdirectory(rootpath)
     #TODO flag -d :find duplicates
     for file_tmp in read_files:
-        print(file_tmp)
+        print("cycle({0})".format( file_tmp ) )
 
 
 def readdirectory(rootpath): #TODO move in class Rootpath
@@ -38,15 +38,6 @@ def readdirectory(rootpath): #TODO move in class Rootpath
         print (   sys.exc_info() )
     return readfiles;
 
-def buildsinglefile(currentfile, directory):
-    """
-        It parses command line options
-        ----------
-        currentfile: file    File in reading now
-        directory: file
-            Abolsute path of the file
-    """
-    return SingleFile(currentfile, directory)
 
 def walkdir(root_path,  readfiles ):
     """
@@ -58,7 +49,7 @@ def walkdir(root_path,  readfiles ):
     for root, dirs, files in os.walk(root_path):
         path = root.split(os.sep)
         for file1 in files:
-            row = buildsinglefile(file1, os.sep.join(path))
+            row = SingleFile(file1, os.sep.join(path))
             readfiles.append(row.tocsv)
         for directory in dirs:
             walkdir(directory, readfiles)
