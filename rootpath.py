@@ -1,11 +1,7 @@
 import sys
 import os
-import datetime
 import settings
 import Position
-import message
-
-from SingleFile import SingleFile
 
 
 
@@ -20,7 +16,7 @@ class Rootpath:
         self.root_path = opts[Position.PATH]
 
     def data(self):
-       return self.root_path 
+       return str(self.root_path )
 
 
 

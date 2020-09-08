@@ -6,70 +6,21 @@ import Position
 import message
 
 from SingleFile import SingleFile
+
 from rootpath import Rootpath
+from report_name import ReportName
 
 def main():
-    """
-        Summary line.
-
-        It parses command line options
-
-        Parameters
-        ----------
-        nil
-
-        Returns
-        -------
-        nil
-    """
     opts = sys.argv
     print(message.ARGUMENTS + str(opts))
 
     rootpath = Rootpath(opts)
-    extension = buildextension(opts)
-    reportname = buildreportname(opts)
-    separator = buildseparator(opts)
+    reportname = ReportName(opts).name()
 
-    readdirectory(rootpath, extension, reportname, separator)
-
-
-
-def buildseparator(opts):
-    """
-        It parses command line options
-        opts: array    input parameters
-    """
-    if (opts.__len__()) > Position.SEPARATOR:
-        separator = opts[ Position.SEPARATOR]
-    else:
-        separator = settings.DEFAULT_SEPARATOR
-    return separator
-
-
-def buildextension(opts):
-    """
-        It determines the type of file to read
-        ----------
-        opts: array    input parameters
-    """
-    if opts.__len__() > Position.EXTENSION:
-        extension = opts[Position.EXTENSION].replace('.', '')
-    else:
-        extension = ''
-    return extension
-
-
-def buildreportname(opts):
-    """
-        It creates the name of final report file
-        ----------
-        opts: array    input parameters
-      """
-    if opts.__len__() > Position.REPORT_NAME:
-        reportname = opts[Position.REPORT_NAME]
-    else:
-        reportname = settings.NAME_REPORT_FILE + datetime.datetime.now().strftime(settings.DATE_FORMAT) + settings.EXTENSION_FINAL_FILE
-    return reportname
+    read_files = readdirectory(rootpath)
+    #TODO flag -d :find duplicates
+    for file_tmp in read_files:
+        print(file_tmp)
 
 
 def readdirectory(rootpath): #TODO move in class Rootpath
@@ -82,7 +33,7 @@ def readdirectory(rootpath): #TODO move in class Rootpath
     try:
         existing_directory = os.path.exists(rootpath.data())
         if (existing_directory):
-            walkdir(rootpath, readfiles)
+            walkdir(rootpath.data(), readfiles)
     except:
         print (   sys.exc_info() )
     return readfiles;
@@ -95,9 +46,7 @@ def buildsinglefile(currentfile, directory):
         directory: file
             Abolsute path of the file
     """
-    print("a1")
-    x = SingleFile(currentfile, directory)
-    return x
+    return SingleFile(currentfile, directory)
 
 def walkdir(root_path,  readfiles ):
     """
@@ -107,9 +56,7 @@ def walkdir(root_path,  readfiles ):
         readfiles: list            list of read files inside path
     """
     for root, dirs, files in os.walk(root_path):
-
         path = root.split(os.sep)
-
         for file1 in files:
             row = buildsinglefile(file1, os.sep.join(path))
             readfiles.append(row.tocsv)
