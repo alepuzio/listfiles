@@ -6,7 +6,7 @@ import Position
 import message
 
 from SingleFile import SingleFile
-
+from rootpath import Rootpath
 
 def main():
     """
@@ -25,7 +25,7 @@ def main():
     opts = sys.argv
     print(message.ARGUMENTS + str(opts))
 
-    rootpath = buildrootpath(opts)
+    rootpath = Rootpath(opts)
     extension = buildextension(opts)
     reportname = buildreportname(opts)
     separator = buildseparator(opts)
@@ -49,13 +49,13 @@ def buildrootpath(opts):
     """
     if Position.PATH > len(opts):
         print(message.INPUT_PATH_MISSING)
-        sys.exit(message.ERROR_PROGRAM)
+        sys.exit(1)
     else:
         rootpath = opts[Position.PATH]
 
         if (not (os.path.isabs(rootpath)) or (os.path.isfile(rootpath))):
             print(message.INPUT_PATH_UNCORRECT)
-            sys.exit(message.ERROR_PROGRAM)
+            sys.exit(1)
         else:
             print()
 
@@ -152,7 +152,7 @@ def readdirectory(rootpath, extension, reportname, separator):
     """
     readfiles = []
     try:
-        existing_directory = os.path.exists(rootpath)
+        existing_directory = os.path.exists(rootpath.data())
         if (existing_directory):
             walkdir(rootpath, readfiles)
         #delete existing report file
@@ -209,8 +209,8 @@ def walkdir(root_path,  readfiles ):
 
         path = root.split(os.sep)
 
-        for file in files:
-            row = buildsinglefile(file, os.sep.join(path))
+        for file1 in files:
+            row = buildsinglefile(file1, os.sep.join(path))
             readfiles.append(row.tocsv)
         for directory in dirs:
             walkdir(directory, readfiles)
@@ -247,8 +247,8 @@ def writerows (readfiles, report):
         -------
         nil
     """
-    for file in readfiles:
-        report.write(file)
+    for file1 in readfiles:
+        report.write(file1)
     print(message.END_WRITING_FILE)
 
 if __name__ == "__main__":
