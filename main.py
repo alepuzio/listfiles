@@ -32,50 +32,12 @@ def main():
 
     readdirectory(rootpath, extension, reportname, separator)
 
-def buildrootpath(opts):
-    """
-        Summary line.
-
-        It read the rootpath
-
-        Parameters
-        ----------
-        opts: array
-            input parameters
-
-        Returns
-        -------
-        nil
-    """
-    if Position.PATH > len(opts):
-        print(message.INPUT_PATH_MISSING)
-        sys.exit(1)
-    else:
-        rootpath = opts[Position.PATH]
-
-        if (not (os.path.isabs(rootpath)) or (os.path.isfile(rootpath))):
-            print(message.INPUT_PATH_UNCORRECT)
-            sys.exit(1)
-        else:
-            print()
-
-    return rootpath
 
 
 def buildseparator(opts):
     """
-        Summary line.
-
         It parses command line options
-
-        Parameters
-        ----------
-        opts: array
-            input parameters
-
-        Returns
-        -------
-        nil
+        opts: array    input parameters
     """
     if (opts.__len__()) > Position.SEPARATOR:
         separator = opts[ Position.SEPARATOR]
@@ -86,19 +48,9 @@ def buildseparator(opts):
 
 def buildextension(opts):
     """
-        Summary line.
-
         It determines the type of file to read
-
-        Parameters
         ----------
-        opts: array
-            input parameters
-
-
-        Returns
-        -------
-        nil
+        opts: array    input parameters
     """
     if opts.__len__() > Position.EXTENSION:
         extension = opts[Position.EXTENSION].replace('.', '')
@@ -109,18 +61,9 @@ def buildextension(opts):
 
 def buildreportname(opts):
     """
-        Summary line.
-
         It creates the name of final report file
-
-        Parameters
         ----------
-        opts: array
-            input parameters
-
-        Returns
-        -------
-        nil
+        opts: array    input parameters
       """
     if opts.__len__() > Position.REPORT_NAME:
         reportname = opts[Position.REPORT_NAME]
@@ -131,24 +74,12 @@ def buildreportname(opts):
 
 def readdirectory(rootpath, extension, reportname, separator):
     """
-        Summary line.
-
         It read a directory recursavely
-
-        Parameters
         ----------
-        rootpath: string
-            abolsut epath of root directory
-        extension: string
-            extension of files to read
-        reportname: string
-            name of the final report file
-        separator: string
-            char of separator
-
-        Returns
-        -------
-        nil
+        rootpath: string    abolsut epath of root directory
+        extension: string            extension of files to read
+        reportname: string            name of the final report file
+        separator: string            char of separator
     """
     readfiles = []
     try:
@@ -171,20 +102,11 @@ def readdirectory(rootpath, extension, reportname, separator):
 
 def buildsinglefile(currentfile, directory):
     """
-        Summary line.
-
         It parses command line options
-
-        Parameters
         ----------
-        currentfile: file
-            File in reading now
-
+        currentfile: file    File in reading now
         directory: file
             Abolsute path of the file
-        Returns
-        -------
-        nil
     """
     print("a1")
     x = SingleFile(currentfile, directory)
@@ -192,18 +114,10 @@ def buildsinglefile(currentfile, directory):
 
 def walkdir(root_path,  readfiles ):
     """
-        Summary line.
-
         It traverses root directory, and list directories as dirs and files as files
-
-        Parameters
         ----------
-        root_path: string
-            root of the path
-        readfiles: list
-            list of read files inside path
-        Returns
-        -------
+        root_path: string    root of the path
+        readfiles: list            list of read files inside path
     """
     for root, dirs, files in os.walk(root_path):
 
@@ -215,41 +129,6 @@ def walkdir(root_path,  readfiles ):
         for directory in dirs:
             walkdir(directory, readfiles)
 
-def tocsvLabel():
-    """
-        Summary line.
-
-        It return the summary of CSV file
-
-        Parameters
-        ----------
-        nil
-
-        Returns
-        -------
-        nil
-    """
-    return settings.SUMMARY_FINAL_FILE
-
-def writerows (readfiles, report):
-    """
-        Summary line.
-
-        It writes the elements of list of file in target file
-
-        Parameters
-        ----------
-        readfiles: list
-            list of SingleFile in csv form
-        report: file
-            final file of report
-        Returns
-        -------
-        nil
-    """
-    for file1 in readfiles:
-        report.write(file1)
-    print(message.END_WRITING_FILE)
 
 if __name__ == "__main__":
     main()

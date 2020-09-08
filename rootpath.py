@@ -11,18 +11,9 @@ from SingleFile import SingleFile
 
 class Rootpath:
     """
-        Summary line.
-
         It read the rootpath
-
-        Parameters
         ----------
-        opts: array
-            input parameters
-
-        Returns
-        -------
-        nil
+        opts: array    input parameters
     """
 
     def __init__(self, opts):

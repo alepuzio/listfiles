@@ -23,7 +23,7 @@ class SingleFile:
         filetmp.close()
 
     @property
-    def tocsv(self):
+    def tocsv(self):#TODO cosa fa questa annotation
         separator_file = settings.DEFAULT_SEPARATOR
         nome = str(self.name)+separator_file+str(self.directory)+separator_file+str(self.extension)+separator_file+str(self.dimension)+separator_file\
                + datetime.datetime.fromtimestamp(float(self.timestamp)).strftime(settings.DATE_FORMAT) +"\n"

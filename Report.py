@@ -64,11 +64,7 @@ def tocsvLabel():
 
 def writerows (readfiles, report):
     """
-        Summary line.
-
         It writes the elements of list of file in target file
-
-        Parameters
         ----------
         readfiles: list
             list of SingleFile in csv form
