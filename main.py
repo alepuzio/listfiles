@@ -72,33 +72,20 @@ def buildreportname(opts):
     return reportname
 
 
-def readdirectory(rootpath, extension, reportname, separator):
+def readdirectory(rootpath): #TODO move in class Rootpath
     """
         It read a directory recursavely
         ----------
-        rootpath: string    abolsut epath of root directory
-        extension: string            extension of files to read
-        reportname: string            name of the final report file
-        separator: string            char of separator
+        rootpath: class    abolsut epath of root directory
     """
     readfiles = []
     try:
         existing_directory = os.path.exists(rootpath.data())
         if (existing_directory):
             walkdir(rootpath, readfiles)
-        #delete existing report file
-
-        if (os.path.exists(reportname)):
-            os.remove(reportname)
-        #create file
-        report = open(reportname, settings.AUTHORIZATION_FILE)
-        report.write(tocsvLabel())
-        writerows(readfiles, report)
-        report.close()
     except:
-        e = sys.exc_info()
-        print(e)
-    print (message.END_EXECUTION )
+        print (   sys.exc_info() )
+    return readfiles;
 
 def buildsinglefile(currentfile, directory):
     """
