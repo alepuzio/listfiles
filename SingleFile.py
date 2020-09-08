@@ -17,7 +17,7 @@ class SingleFile:
         filename, file_extension = currentfile.split('.')
 
         self.timestamp = statinfo.st_atime
-        self.name= filename
+        self.name = filename
         self.extension= file_extension
         self.dimension = statinfo.st_size
         filetmp.close()
@@ -28,3 +28,6 @@ class SingleFile:
         nome = str(self.name)+separator_file+str(self.directory)+separator_file+str(self.extension)+separator_file+str(self.dimension)+separator_file\
                + datetime.datetime.fromtimestamp(float(self.timestamp)).strftime(settings.DATE_FORMAT) +"\n"
         return nome
+
+    def filename(self):
+        return self.name

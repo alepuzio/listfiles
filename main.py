@@ -19,8 +19,16 @@ def main():
 
     read_files = readdirectory(rootpath)
     #TODO flag -d :find duplicates
+    read_files.sort()
+    unique_read_files = []
+    duplicated_read_files = []
     for file_tmp in read_files:
         print("cycle({0})".format( file_tmp ) )
+        if file_tmp.filename() in unique_read_files:
+            duplicated_read_files.append ( file_tmp)
+        else:
+            unique_read_files.append ( file_tmp)
+
 
 
 def readdirectory(rootpath): #TODO move in class Rootpath
