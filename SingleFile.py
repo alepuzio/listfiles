@@ -9,30 +9,62 @@ class SingleFile:
     def __iter__(self):
         return iter(self.name)
 
-    def __init__(self, currentfile, newdirectory):
-        self.directory = newdirectory
-        pathCompleto = newdirectory + os.sep + currentfile;
-        filetmp  = open(pathCompleto, 'r');
-        statinfo = os.stat(pathCompleto)
-        filename, file_extension = currentfile.split('.')
+    def __init__(self, new_physical_data):
+        self.physical = new_physical_data
 
-        self.timestamp = statinfo.st_atime
-        self.name = filename
-        self.extension= file_extension
-        self.dimension = statinfo.st_size
-        filetmp.close()
+    def directory(self):
+        return  self.physical.path().split('.')[0]#TODO move out the method
 
-    #@property
-    def tocsv(self):#TODO cosa fa questa annotation
-        separator_file = settings.DEFAULT_SEPARATOR
-        nome = str(self.name)+separator_file+str(self.directory)+separator_file+str(self.extension)+separator_file+str(self.dimension)+separator_file\
-               + datetime.datetime.fromtimestamp(float(self.timestamp)).strftime(settings.DATE_FORMAT) +"\n"
-        return nome
+    def dimension(self):
+        return str(self.physical.data().st_size)
 
-    def filename(self):
-        return self.name
+    def timestamp(self):
+        return self.physical.data().st_atime
+    
+    def extension(self):
+        return  self.physical.path().split('.')[1]#TODO move out the method
 
-    ''' 
+    def filename(self): 
+        list_subdirectory = self.physical.path().split(os.sep)
+        list_subdirectory.reverse() 
+        return list_subdirectory[0].split(".")[0]#TODO move out the method
+
+    '''
     def __eq__(self, other):
         return "{0}{1}{2}"
-        '''
+     '''
+
+
+class PhysicalData:
+
+    def __init__(self, new_current, new_directory):
+        self.directory = new_directory
+        self.currentfile = new_current 
+    
+    def data(self): 
+        path = self.path()
+        filetmp  = open( path, 'r' );
+        statinfo = os.stat( path )
+        filetmp.close()
+        return statinfo
+
+    def path(self):
+        return self.directory + os.sep + self.currentfile;
+
+class RowCSV:
+
+    def __init__(self, new_single_file):
+        self.single_file = new_single_file
+
+    def tocsv(self):#TODO cosa fa questa annotation
+        data  = ( self.single_file.filename(),  self.single_file.extension(), 
+
+                "\n")
+            #self.single_file.directory (),  self.single_file.dimension(), "\n")
+                #self.single_file.extension () , self.single_file.dimension (), self.time(), "\n")
+        return ";".join ( data ) 
+
+    def time(self):
+        return datetime.datetime.fromtimestamp ( float(self.single_data.timestamp () ) ).strftime(settings.DATE_FORMAT) 
+        
+

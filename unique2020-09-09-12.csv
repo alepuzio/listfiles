@@ -1,0 +1,12 @@
+NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP
+\resources\first_file;
+\resources\second_file;
+\resources\sub\first_file;
+NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP
+\resources\first_file;
+\resources\second_file;
+\resources\sub\first_file;
+NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP
+first_file;/resources\first_file;
+second_file;/resources\second_file;
+first_file;/resources\sub\first_file;

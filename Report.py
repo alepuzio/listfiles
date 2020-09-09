@@ -2,12 +2,11 @@ import sys
 import os
 import datetime
 import settings
-import Position
 import message
 
 from SingleFile import SingleFile
 from rootpath import Rootpath
-
+from SingleFile import RowCSV
 
 
 class Report:
@@ -28,14 +27,10 @@ class Report:
         """
             It read a directory recursavely
             ----------
-            rootpath: string
-                abolsut epath of root directory
-            extension: string
-                extension of files to read
-            reportname: string
-                name of the final report file
-            separator: string
-                char of separator
+            rootpath: string        abolsut epath of root directory
+            extension: string        extension of files to read
+            reportname: string       name of the final report file
+            separator: string        char of separator
             Returns
             -------
             nil
@@ -43,15 +38,15 @@ class Report:
         try:
             #create file
             report = open(self.name, settings.AUTHORIZATION_FILE)
-            report.write(self.tocsvLabel())
+            report.write(self.csvLabel())
             self.writerows( self.list_files, report)
             report.close()
         except:
             print (  sys.exc_info()  )
-        print (message.END_EXECUTION )
+        print ("The file {0} is finally written".format ( self.name)  )
 
 
-    def tocsvLabel(self):
+    def csvLabel(self):
         '''@return the summary of CSV file
         '''
         return settings.SUMMARY_FINAL_FILE
@@ -64,5 +59,5 @@ class Report:
             report: file        final file of report
         """
         for file1 in readfiles:
-            report.write(file1.tocsv())
-        print(message.END_WRITING_FILE)
+            report.write(RowCSV( file1 ) .tocsv())
+        print("The rows are all written")
