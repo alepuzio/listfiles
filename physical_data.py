@@ -25,6 +25,9 @@ class PhysicalData:
     def path(self):
         return self.directory + os.sep + self.currentfile;
 
+    def __hash__(self):
+        return hash(self.directory) * 10 + hash (self.currentfile)
+
 class PhysicalDataFake:
 
     def __init__(self, new_current, new_directory):

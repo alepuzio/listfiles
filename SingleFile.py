@@ -13,6 +13,10 @@ class SingleFile:
     def __iter__(self):
         return iter(self.name)
 
+    def __lt__(self, other):
+        return len(self.filename) > len(other.filename)
+
+
     def __init__(self, new_physical_data):
         self.physical = new_physical_data
         self.filename = Filename(new_physical_data)
@@ -28,6 +32,9 @@ class SingleFile:
     def timestamp(self):
         return self.physical.data().st_atime
     
+    def __hash__(self):
+        return hash(self.filename)
+
     def name(self):
         return self.filename
 
@@ -42,8 +49,7 @@ class SingleFile:
         #print("****extension.eq:{0}={1}".format( self.name().extension() , other.name().extension()  )  ) 
         #print("******res: {0} and {1} ".format ( str (self.dimension() == other.dimension() ), str(self.name() == other.name() )) )
         ''' 
-        return self.name() == other.name()
-        #return self.dimension() == other.dimension() and self.name() == other.name()
+        return self.name().name() == other.name().name()
 
     def __str__(self):
         return "SingleFile.str:{0};{1}|{2}".format ( self.name().name(), self.name().extension(), str(self.dimension()) )
@@ -61,7 +67,9 @@ class Filename:
         #print ("name [{0}]".format (list_subdirectory[0] ))
         return list_subdirectory[0]
 
-    
+    def __hash__(self):
+        return hash(self.physical)    
+
     def extension(self):
         return self.prepare()[1]
 
@@ -69,7 +77,9 @@ class Filename:
         list_subdirectory = self.physical.path().split(os.sep)
         list_subdirectory.reverse() 
         return list_subdirectory[0].split(".")
-
+    
+    def __lt__(self, other):
+        return self.name() < other.name()
 
 
     def __str__(self):
