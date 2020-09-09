@@ -30,8 +30,8 @@ class SingleFile:
         return list_subdirectory[0].split(".")[0]#TODO move out the method
 
     def __eq__(self, other):
-        #return self.dimension() == other.dimension() and self.filename() == other.filename()
-        return (self.filename() == other.filename())
+        return self.dimension() == other.dimension() and self.filename() == other.filename()
+        #return (self.filename() == other.filename())
     
 
 
