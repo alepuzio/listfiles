@@ -1,8 +1,8 @@
 import sys
 import os
 import datetime
-import settings
-import message
+#import settings
+#import message
 
 from SingleFile import SingleFile
 from rootpath import Rootpath
@@ -38,7 +38,7 @@ class Report:
         try:
             #create file
             self.homonym()
-            report = open(self.name, settings.AUTHORIZATION_FILE)
+            report = open(self.name, "w")
             report.write(self.csvLabel())
             self.writerows( self.list_files, report)
             report.close()
@@ -50,7 +50,7 @@ class Report:
     def csvLabel(self):
         '''@return the summary of CSV file
         '''
-        return settings.SUMMARY_FINAL_FILE
+        return "NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP\n"
 
     def writerows (self, readfiles, report):
         """

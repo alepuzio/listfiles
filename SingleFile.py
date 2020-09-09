@@ -2,7 +2,11 @@ import os
 from os.path import splitext
 import time
 import datetime
-import settings
+#import settings
+import unittest
+from physical_data import PhysicalData
+from physical_data import PhysicalDataFake
+
 
 class SingleFile:
 
@@ -11,9 +15,12 @@ class SingleFile:
 
     def __init__(self, new_physical_data):
         self.physical = new_physical_data
+        self.filename = Filename(new_physical_data)
 
     def directory(self):
-        return  self.physical.path().split('.')[0]#TODO move out the method
+        dirs = self.physical.path().split(os.sep)
+        print ("dirs1:" +   str( os.sep.join(dirs[0:len(dirs) -1 ] ) ))
+        return  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
 
     def dimension(self):
         return self.physical.data().st_size
@@ -21,35 +28,88 @@ class SingleFile:
     def timestamp(self):
         return self.physical.data().st_atime
     
-    def extension(self):
-        return  self.physical.path().split('.')[1]#TODO move out the method
-
-    def filename(self): 
-        list_subdirectory = self.physical.path().split(os.sep)
-        list_subdirectory.reverse() 
-        return list_subdirectory[0].split(".")[0]#TODO move out the method
+    def name(self):
+        return self.filename
 
     def __eq__(self, other):
-        return self.dimension() == other.dimension() and self.filename() == other.filename()
-        #return (self.filename() == other.filename())
+        '''
+        print("*dimension.eq:{0}={1} = {2}".format( str( self.dimension() ),    str( other.dimension() )  
+                , str (self.dimension() == other.dimension() )
+                 ) )
+        print("**name.eq:{0}={1} = {2}".format( self.name().name() , other.name().name()   
+                , str( self.name().name()  ==  other.name().name() ) ) )  
+                
+        #print("****extension.eq:{0}={1}".format( self.name().extension() , other.name().extension()  )  ) 
+        #print("******res: {0} and {1} ".format ( str (self.dimension() == other.dimension() ), str(self.name() == other.name() )) )
+        ''' 
+        return self.name() == other.name()
+        #return self.dimension() == other.dimension() and self.name() == other.name()
+
+    def __str__(self):
+        return "SingleFile.str:{0};{1}|{2}".format ( self.name().name(), self.name().extension(), str(self.dimension()) )
+
+    def __repr__(self):
+        return "SingleFile.repr:{0};{1}|{2}".format ( self.name().name(), self.name().extension() , str(self.dimension() ) )
+
+class Filename:
+
+    def __init__(self, new_physical):
+        self.physical = new_physical
     
+    def name(self): 
+        list_subdirectory = self.prepare()
+        #print ("name [{0}]".format (list_subdirectory[0] ))
+        return list_subdirectory[0]
 
-
-class PhysicalData:
-
-    def __init__(self, new_current, new_directory):
-        self.directory = new_directory
-        self.currentfile = new_current 
     
-    def data(self): 
-        path = self.path()
-        filetmp  = open( path, 'r' );
-        statinfo = os.stat( path )
-        filetmp.close()
-        return statinfo
+    def extension(self):
+        return self.prepare()[1]
 
-    def path(self):
-        return self.directory + os.sep + self.currentfile;
+    def prepare(self):
+        list_subdirectory = self.physical.path().split(os.sep)
+        list_subdirectory.reverse() 
+        return list_subdirectory[0].split(".")
+
+
+
+    def __str__(self):
+        return "Filename:{0}.{1}".format(self.name(), self.extension())
+
+    def __eq__(self, other):
+        return self.name() == self.name() and self.extension() == self.extension()
+
+    def __repr__(self):
+        return "Filename.repr:{0}.{1}".format(self.name(), self.extension())
+
+class TestSingleFile (unittest.TestCase):
+
+    def test_eq(self):
+        one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+        two = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+        self.assertEqual(one, two)
+
+    def test_not_eq(self):
+        one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+        two = SingleFile ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
+        self.assertEqual(one, two)
+
+
+class TestFilename (unittest.TestCase):
+
+    def test_eq(self):
+        one = Filename ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
+        two = Filename ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
+        print("one:" + str( one ))
+        print("two:" + str(two ) )
+        self.assertEqual(one, two)
+
+    def test_not_eq(self):
+        one = Filename ( PhysicalDataFake( "nome3.txt", "C:\\path\\") )
+        two = Filename ( PhysicalDataFake( "nome4.txt", "C:\\path\\") )
+        print("one:" + str( one ))
+        print("two:" + str(two ) )
+        self.assertEqual(one, two)
+
 
 class RowCSV:
 
@@ -57,14 +117,11 @@ class RowCSV:
         self.single_file = new_single_file
 
     def tocsv(self):#TODO cosa fa questa annotation
-        data  = ( self.single_file.filename(),  self.single_file.extension(), 
-
-                "\n")
-            #self.single_file.directory (),  self.single_file.dimension(), "\n")
-                #self.single_file.extension () , str( self.single_file.dimension () ), self.time(), "\n")
+        data  = ( self.single_file.name().name(), self.single_file.directory(), self.single_file.name().extension(), 
+                str( self.single_file.dimension () ), self.time(), "\n")
         return ";".join ( data ) 
 
     def time(self):
-        return datetime.datetime.fromtimestamp ( float(self.single_data.timestamp () ) ).strftime(settings.DATE_FORMAT) 
+        return datetime.datetime.fromtimestamp ( float(self.single_file.timestamp () ) ).strftime( "%Y-%m-%d-%H-%M" ) 
         
 
