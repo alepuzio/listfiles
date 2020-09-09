@@ -18,8 +18,8 @@ class Report:
         self.list_files = new_list_files
 
     def homonym(self):
-        if (os.path.exists(reportname)):
-            os.remove(reportname)
+        if os.path.exists( self.name ) :
+            os.remove( self.name )
         else:
             pass
 
@@ -37,6 +37,7 @@ class Report:
         """
         try:
             #create file
+            self.homonym()
             report = open(self.name, settings.AUTHORIZATION_FILE)
             report.write(self.csvLabel())
             self.writerows( self.list_files, report)

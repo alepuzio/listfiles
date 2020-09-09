@@ -16,7 +16,7 @@ class SingleFile:
         return  self.physical.path().split('.')[0]#TODO move out the method
 
     def dimension(self):
-        return str(self.physical.data().st_size)
+        return self.physical.data().st_size
 
     def timestamp(self):
         return self.physical.data().st_atime
@@ -29,10 +29,10 @@ class SingleFile:
         list_subdirectory.reverse() 
         return list_subdirectory[0].split(".")[0]#TODO move out the method
 
-    '''
     def __eq__(self, other):
-        return "{0}{1}{2}"
-     '''
+        #return self.dimension() == other.dimension() and self.filename() == other.filename()
+        return (self.filename() == other.filename())
+    
 
 
 class PhysicalData:
@@ -61,7 +61,7 @@ class RowCSV:
 
                 "\n")
             #self.single_file.directory (),  self.single_file.dimension(), "\n")
-                #self.single_file.extension () , self.single_file.dimension (), self.time(), "\n")
+                #self.single_file.extension () , str( self.single_file.dimension () ), self.time(), "\n")
         return ";".join ( data ) 
 
     def time(self):

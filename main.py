@@ -20,7 +20,7 @@ def main():
     
     for file_tmp in read_files:
         print("cycle({0})".format( file_tmp.filename() ) )
-        if file_tmp.filename() in unique_read_files:
+        if file_tmp in unique_read_files:
             duplicated_read_files.append ( file_tmp)
         else:
             unique_read_files.append ( file_tmp)
