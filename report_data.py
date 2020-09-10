@@ -51,9 +51,14 @@ class Report:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
+        print("1")
         for file1 in readfiles:
             report.write(RowCSV( file1 ) .tocsv())
-        print("The rows are all written")
+        print("2") 
+        self.end(readfiles)
+
+    def end(self, readfiles):
+        print("All the {0} rows have been written".format ( len(readfiles) ) )
 
 
 
@@ -103,7 +108,6 @@ class MapReport:
             for file2 in readfiles[file1]:
                 report.write(RowCSV( file2 ) .tocsv())
 
-        print("The rows are all written")
-
+        self.origin.end(readfiles.keys())
 
 
