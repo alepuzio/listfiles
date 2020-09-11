@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-     name = 'listfiles',  
+     name = 'report-files',  
      version = '0.1.0',
      author = "Alessandro Puzielli",
      author_email = "alessandro.puzielli@alepuzio.net",
