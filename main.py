@@ -2,9 +2,9 @@ import sys
 
 
 from rootpath import Rootpath
-from report_data import MapReport
-from report_data import Report
-from report_name import ReportName
+from report.report_data import MapReport
+from report.report_data import Report
+from report.report_name import ReportName
 
 from duplicated_files import Duplicated
 

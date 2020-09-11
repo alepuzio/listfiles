@@ -3,8 +3,9 @@ import os
 
 from single_file import SingleFile
 from rootpath import Rootpath
-from report_file import RowCSV
-from report_file import RowDuplicated
+#from report_file import RowCSV
+from .report_file import RowCSV
+from .report_file import RowDuplicated
 
 
 class Report:
@@ -52,7 +53,7 @@ class Report:
             report: file        final file of report
         """
         for file1 in readfiles:
-            report.write(RowCSV( file1 ).data())
+            report.write( RowCSV( file1 ).data())
         self.end(readfiles)
 
     def end(self, readfiles):
