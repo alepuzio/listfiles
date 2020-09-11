@@ -1,5 +1,4 @@
 import os
-import time
 import datetime
 import unittest
 from single_file import SingleFile
@@ -15,7 +14,7 @@ class RowCSV:
         return self.csv(filename)
 
     def time(self):
-        return datetime.datetime.fromtimestamp ( float(self.single_file.timestamp () ) ).strftime( "%Y-%m-%d-%H-%M" ) 
+        return datetime.datetime.fromtimestamp ( float(self.single_file.timestamp () ) ).strftime( "%Y-%m-%d-%H-%M" ) #TODO class ad-hoc
         
     def csv(self, filename):
         data  = (filename , str( self.single_file.dimension () ), self.time(), "\n")

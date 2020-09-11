@@ -1,9 +1,4 @@
-import sys
-#import os
-import datetime
-
 from single_file import SingleFile
-
 import unittest
 
 class Duplicated:
@@ -33,12 +28,10 @@ class Occurrence:
         self.file_tmp = new_file_tmp
 
     def excessive(self):
-        #print("excessive:{0}".format( str( self.list_files()) ) )
         return 1 < len (self.list_files()) #TODO remove magic number
 
     def list_files(self):
         list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
-        #print ("list_files{0}:{1}".format( len(list_files), str( list_files ) ) )  
         return list_files 
 
 class TestOccurrence(unittest.TestCase):

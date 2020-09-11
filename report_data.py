@@ -1,6 +1,5 @@
 import sys
 import os
-import datetime
 
 from single_file import SingleFile
 from rootpath import Rootpath

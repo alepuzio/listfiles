@@ -1,8 +1,5 @@
-#import os
+import os
 from os.path import splitext
-import time
-import datetime
-#import settings
 import unittest
 
 
@@ -19,11 +16,10 @@ class PhysicalData:
         filetmp  = open( path, 'r' );
         statinfo = os.stat( path )
         filetmp.close()
-        #print("statinfo[{0}]".format( str ( statinfo ) ) )   #'os.stat_result'>]
         return statinfo
 
     def path(self):
-        return self.directory + os.sep + self.currentfile;
+        return "{0}{1}{2}".format( self.directory , os.sep ,self.currentfile )
 
     def __hash__(self):
         return hash(self.directory) * 10 + hash (self.currentfile)
@@ -36,7 +32,6 @@ class PhysicalDataFake:
 
     def data(self): 
         return DataFake() 
-        #"[os.stat_result(st_mode=33206, st_ino=15199648742420042, st_dev=1658795973, st_nlink=1, st_uid=0, st_gid=0, st_size=0, st_atime=1599579491, st_mtime=1599579491, st_ctime=1599579491)"
 
     def path(self):
         return "{0}_fake/{1}".format(self.dir, self.name)
