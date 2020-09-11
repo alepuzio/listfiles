@@ -1,4 +1,4 @@
-import os
+#import os
 from os.path import splitext
 import time
 import datetime
