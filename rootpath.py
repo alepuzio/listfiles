@@ -1,7 +1,7 @@
 import sys
 import os
-from SingleFile import PhysicalData
-from SingleFile import SingleFile
+from single_file import PhysicalData
+from single_file import SingleFile
 
 
 class Rootpath:
@@ -19,17 +19,17 @@ class Rootpath:
         """
             It read a directory recursavely
             ----------
-            rootpath: class    abolsut epath of root directory
+            rootpath: class  absolute path of root directory
         """
         readfiles = []
         try:
             if ( self.exists() ):
                 self.dir(self.data(), readfiles)
             else:
-                print ( "the directory [{0}] doesn'nt exists".format ( self.data() ) )  
+                print ( "The directory [{0}] doesn'nt exists".format ( self.data() ) )  
         except:
             print ( sys.exc_info() )
-        print ("lunghezza {0} ".format ( str( len ( readfiles )  ) ) )
+        print ("The total number of the read files is {0}".format ( str( len ( readfiles )  ) ) )
         return readfiles;
 
 

@@ -2,7 +2,6 @@ import os
 from os.path import splitext
 import time
 import datetime
-#import settings
 import unittest
 from physical_data import PhysicalData
 from physical_data import PhysicalDataFake
@@ -23,8 +22,8 @@ class SingleFile:
 
     def directory(self):
         dirs = self.physical.path().split(os.sep)
-        print ("dirs1:" +   str( os.sep.join(dirs[0:len(dirs) -1 ] ) ))
-        return  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
+        value =  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
+        return  value
 
     def dimension(self):
         return self.physical.data().st_size
@@ -64,7 +63,6 @@ class Filename:
     
     def name(self): 
         list_subdirectory = self.prepare()
-        #print ("name [{0}]".format (list_subdirectory[0] ))
         return list_subdirectory[0]
 
     def __hash__(self):
@@ -75,7 +73,9 @@ class Filename:
 
     def prepare(self):
         list_subdirectory = self.physical.path().split(os.sep)
-        list_subdirectory.reverse() 
+        list_subdirectory.reverse()
+        if not "." in list_subdirectory[0]:#TODO move in a defensive decorator
+            raise Exception ("The first element of the list {0} lacks of the dot, please control".format( str(list_subdirectory[0] ) ) )
         return list_subdirectory[0].split(".")
     
     def __lt__(self, other):
@@ -121,17 +121,5 @@ class TestFilename (unittest.TestCase):
         self.assertEqual(one, two)
 
 
-class RowCSV:
-
-    def __init__(self, new_single_file):
-        self.single_file = new_single_file
-
-    def tocsv(self):#TODO cosa fa questa annotation
-        data  = ( self.single_file.name().name(), self.single_file.directory(), self.single_file.name().extension(), 
-                str( self.single_file.dimension () ), self.time(), "\n")
-        return ";".join ( data ) 
-
-    def time(self):
-        return datetime.datetime.fromtimestamp ( float(self.single_file.timestamp () ) ).strftime( "%Y-%m-%d-%H-%M" ) 
         
 

@@ -2,9 +2,9 @@ import sys
 import os
 import datetime
 
-from SingleFile import SingleFile
+from single_file import SingleFile
 
-from collections import Counter
+import unittest
 
 class Duplicated:
     
@@ -18,33 +18,52 @@ class Duplicated:
         map_files =  {}
         for file_tmp in self.list_files:
             map_files[file_tmp] = file_tmp.name().name() 
-
         duplicated = {}
         for filename_tmp in set(map_files.values()) : 
-            #print  ( list ( map_files.values() )  )
-            list_examined_files =  [k for k,v in map_files.items() if v == filename_tmp ] 
-            number_occurrences = Occurrence ( [k for k,v in map_files.items() if v == filename_tmp ] )
-
-            print (str (number_occurrences ) )
+            number_occurrences = Occurrence (map_files, filename_tmp ) 
             if number_occurrences.excessive(): 
-                duplicated [filename_tmp] = list_examined_files
-            return duplicated
+                duplicated [filename_tmp] = number_occurrences.list_files()
+        #at the end of the cycle
+        return duplicated
 
-        '''[filename_tmp]   )
-        for filename_tmp in set(map_files.values()) : 
-            occurrences = list( map_files.values()[filename_tmp] ) 
-            number_occurrences = Occurrence( occurrences ) 
-            if number_occurrences.excessive(): 
-                duplicated [filename_tmp] = [k for k,v in map_files.items() if v == filename_tmp ]
-        return duplicated 
-        '''
 class Occurrence:
     '''@overview: class about the occurence of the file'''
-    def __init__(self, new_list_value):
-        self.list_value = new_list_value
+    def __init__(self, new_map_files, new_file_tmp):
+        self.map_files = new_map_files
+        self.file_tmp = new_file_tmp
 
     def excessive(self):
-        return 1 < self.number()
+        #print("excessive:{0}".format( str( self.list_files()) ) )
+        return 1 < len (self.list_files()) #TODO remove magic number
 
-    def number(self):
-        return len(self.list_value)
+    def list_files(self):
+        list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
+        #print ("list_files{0}:{1}".format( len(list_files), str( list_files ) ) )  
+        return list_files 
+
+class TestOccurrence(unittest.TestCase):
+    
+
+    def test_excessive(self):
+        file_tmp = "file_1.txt"
+        map_file = {
+                "singlefile_file_1.txt":"file_1.txt", 
+                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
+                "singlefile_file_2.txt":"file_2.txt" 
+                }
+
+        result = Occurrence(map_file, file_tmp).excessive()
+        self.assertTrue(result)
+
+    def test_list_files(self):
+        file_tmp = "file_1.txt"
+        map_file = {
+                "singlefile_file_1.txt":"file_1.txt", 
+                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
+                "singlefile_file_2.txt":"file_2.txt" 
+                }
+        
+
+        result = Occurrence(map_file, file_tmp).list_files()
+        expected = [ "singlefile_file_1.txt", "singlefile_file_1.txt"]
+        self.assertTrue(result, expected)
