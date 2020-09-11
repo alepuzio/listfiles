@@ -1,7 +1,7 @@
 import sys
 import os
-from single_file import PhysicalData
-from single_file import SingleFile
+from .single_file import PhysicalData
+from .single_file import SingleFile
 
 
 class Rootpath:
@@ -13,7 +13,7 @@ class Rootpath:
        return str(self.root_path )
 
     def exists(self):
-            return os.path.exists(self.data())
+        return os.path.exists(self.data())
 
     def files ( self ): #TODO move in class Rootpath
         """

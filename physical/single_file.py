@@ -1,10 +1,9 @@
 import os
-from os.path import splitext
-import time
-import datetime
 import unittest
-from physical_data import PhysicalData
-from physical_data import PhysicalDataFake
+
+from os.path import splitext
+from .physical_data import PhysicalData
+from .physical_data import PhysicalDataFake
 
 
 class SingleFile:
@@ -38,17 +37,7 @@ class SingleFile:
         return self.filename
 
     def __eq__(self, other):
-        '''
-        print("*dimension.eq:{0}={1} = {2}".format( str( self.dimension() ),    str( other.dimension() )  
-                , str (self.dimension() == other.dimension() )
-                 ) )
-        print("**name.eq:{0}={1} = {2}".format( self.name().name() , other.name().name()   
-                , str( self.name().name()  ==  other.name().name() ) ) )  
-                
-        #print("****extension.eq:{0}={1}".format( self.name().extension() , other.name().extension()  )  ) 
-        #print("******res: {0} and {1} ".format ( str (self.dimension() == other.dimension() ), str(self.name() == other.name() )) )
-        ''' 
-        return self.name().name() == other.name().name()
+        return self.name().name() == other.name().name() and self.dimension() == other.dimension()
 
     def __str__(self):
         return "SingleFile.str:{0};{1}|{2}".format ( self.name().name(), self.name().extension(), str(self.dimension()) )
