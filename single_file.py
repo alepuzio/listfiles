@@ -2,7 +2,6 @@ import os
 from os.path import splitext
 import time
 import datetime
-#import settings
 import unittest
 from physical_data import PhysicalData
 from physical_data import PhysicalDataFake
@@ -23,7 +22,7 @@ class SingleFile:
 
     def directory(self):
         dirs = self.physical.path().split(os.sep)
-        value =   str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
+        value =  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
         return  value
 
     def dimension(self):
@@ -122,17 +121,5 @@ class TestFilename (unittest.TestCase):
         self.assertEqual(one, two)
 
 
-class RowCSV:
-
-    def __init__(self, new_single_file):
-        self.single_file = new_single_file
-
-    def tocsv(self):#TODO cosa fa questa annotation
-        data  = ( self.single_file.name().name(), self.single_file.directory(), self.single_file.name().extension(), 
-                str( self.single_file.dimension () ), self.time(), "\n")
-        return ";".join ( data ) 
-
-    def time(self):
-        return datetime.datetime.fromtimestamp ( float(self.single_file.timestamp () ) ).strftime( "%Y-%m-%d-%H-%M" ) 
         
 

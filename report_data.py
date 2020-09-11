@@ -2,9 +2,10 @@ import sys
 import os
 import datetime
 
-from SingleFile import SingleFile
+from single_file import SingleFile
 from rootpath import Rootpath
-from SingleFile import RowCSV
+from report_file import RowCSV
+from report_file import RowDuplicated
 
 
 class Report:
@@ -31,7 +32,7 @@ class Report:
         try:
             #create file
             self.homonym()
-            report = open(self.name, "w")
+            report = open(self.name, "w")#TODO using decorator
             report.write(self.csvLabel())
             self.writerows( list_files, report)
             report.close()
@@ -51,10 +52,8 @@ class Report:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
-        print("1")
         for file1 in readfiles:
-            report.write(RowCSV( file1 ) .tocsv())
-        print("2") 
+            report.write(RowCSV( file1 ).data())
         self.end(readfiles)
 
     def end(self, readfiles):
@@ -76,9 +75,8 @@ class MapReport:
         """
             It read a directory recursavely
             ----------
-            Returns
-            -------
-            nil
+            Returns nil
+            -------    
         """
         try:
             self.homonym()
@@ -92,7 +90,7 @@ class MapReport:
 
     def csvLabel(self):
         '''@return the summary of CSV file'''
-        return self.origin.csvLabel()
+        return "PATH;SIZE;TIMESTAMP\n"
 
     def writerows (self, readfiles, report):
         """
@@ -106,7 +104,7 @@ class MapReport:
             report.write(self.csvLabel())
 
             for file2 in readfiles[file1]:
-                report.write(RowCSV( file2 ) .tocsv())
+                report.write( RowDuplicated( RowCSV( file2 ) ).data())
 
         self.origin.end(readfiles.keys())
 
