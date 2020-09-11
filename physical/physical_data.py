@@ -3,8 +3,6 @@ from os.path import splitext
 import unittest
 
 
-
-
 class PhysicalData:
 
     def __init__(self, new_current, new_directory):

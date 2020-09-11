@@ -1,9 +1,8 @@
 import sys
 import os
 
-from single_file import SingleFile
-from rootpath import Rootpath
-#from report_file import RowCSV
+from physical.single_file import SingleFile
+from physical.rootpath import Rootpath
 from .report_file import RowCSV
 from .report_file import RowDuplicated
 

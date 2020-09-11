@@ -1,4 +1,4 @@
-from single_file import SingleFile
+from physical.single_file import SingleFile
 import unittest
 
 class Duplicated:
