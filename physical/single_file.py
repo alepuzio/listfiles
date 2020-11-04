@@ -2,8 +2,10 @@ import os
 import unittest
 
 from os.path import splitext
-from .physical_data import PhysicalData
-from .physical_data import PhysicalDataFake
+import sys
+sys.path.append("../physical")
+from physical_data import PhysicalData
+from physical_data import PhysicalDataFake
 
 
 class SingleFile:

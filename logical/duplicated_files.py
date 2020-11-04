@@ -1,4 +1,7 @@
-from physical.single_file import SingleFile
+import sys
+
+sys.path.append('../physical')
+from single_file import SingleFile
 import unittest
 
 class Duplicated:
@@ -34,29 +37,3 @@ class Occurrence:
         list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
         return list_files 
 
-class TestOccurrence(unittest.TestCase):
-    
-
-    def test_excessive(self):
-        file_tmp = "file_1.txt"
-        map_file = {
-                "singlefile_file_1.txt":"file_1.txt", 
-                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
-                "singlefile_file_2.txt":"file_2.txt" 
-                }
-
-        result = Occurrence(map_file, file_tmp).excessive()
-        self.assertTrue(result)
-
-    def test_list_files(self):
-        file_tmp = "file_1.txt"
-        map_file = {
-                "singlefile_file_1.txt":"file_1.txt", 
-                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
-                "singlefile_file_2.txt":"file_2.txt" 
-                }
-        
-
-        result = Occurrence(map_file, file_tmp).list_files()
-        expected = [ "singlefile_file_1.txt", "singlefile_file_1.txt"]
-        self.assertTrue(result, expected)
