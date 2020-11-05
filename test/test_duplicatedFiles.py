@@ -1,31 +1,28 @@
 import sys
 sys.path.append('../logical')
 from  duplicated_files import Occurrence
-import unittest
 
-class TestOccurrence(unittest.TestCase):
+#class TestOccurrence(unittest.TestCase):
     
 
-    def test_excessive(self):
-        file_tmp = "file_1.txt"
-        map_file = {
-                "singlefile_file_1.txt":"file_1.txt", 
-                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
-                "singlefile_file_2.txt":"file_2.txt" 
-                }
+def test_excessive_OK ( ) :
+    fileTmp = "file_1.txt"
+    mapFile = {
+        "singlefile_file_1.txt":"file_1.txt", 
+        "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
+        "singlefile_file_2.txt":"file_2.txt" 
+    }
 
-        result = Occurrence(map_file, file_tmp).excessive()
-        self.assertTrue(result)
+    result = Occurrence(mapFile, fileTmp).excessive()
+    assert True == result
 
-    def test_list_files(self):
-        file_tmp = "file_1.txt"
-        map_file = {
-                "singlefile_file_1.txt":"file_1.txt", 
-                "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
-                "singlefile_file_2.txt":"file_2.txt" 
-                }
-        
-
-        result = Occurrence(map_file, file_tmp).list_files()
-        expected = [ "singlefile_file_1.txt", "singlefile_file_1.txt"]
-        self.assertTrue(result, expected)
+def test_listFiles_OK ( ) :
+    fileTmp = "file_1.txt"
+    mapFile = {
+        "singlefile_file_1.txt":"file_1.txt", 
+        "singlefile_dati_interni_diversi_file_1.txt":"file_1.txt", 
+        "singlefile_file_2.txt":"file_2.txt" 
+        }
+    result = Occurrence(mapFile, fileTmp).listFiles() 
+    expected = [ "singlefile_file_1.txt", "singlefile_dati_interni_diversi_file_1.txt"]
+    assert result == expected
