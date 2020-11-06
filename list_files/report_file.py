@@ -2,7 +2,7 @@ import os
 import datetime
 import unittest
 
-from .single_file import SingleFile
+from tests.test_single_file import SingleFile
 
 class RowCSV:
     '''@overview: class that manage the data as CSV row'''

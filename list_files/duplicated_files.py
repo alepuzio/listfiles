@@ -1,6 +1,6 @@
 #import sys
 #sys.path.append('../physical')
-from .single_file import SingleFile
+from tests.test_single_file import SingleFile
 from tests.test_duplicated_files import Occurrence
 import unittest
 

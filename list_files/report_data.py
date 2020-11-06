@@ -1,7 +1,7 @@
 import sys
 import os
 
-from .single_file import SingleFile
+from tests.test_single_file import SingleFile
 from .rootpath import Rootpath
 from .report_file import RowCSV
 from .report_file import RowDuplicated
