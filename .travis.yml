@@ -4,8 +4,8 @@ python: 3.8.6
 #define dependencsy
 install:
   - pip install -r requirements.txt
-# put testing framework
-#script: unitest
+#tests
+script: ./scripts/unit-testing.sh
 # allowed only these branch
 branches:
   only:
