@@ -4,7 +4,7 @@ from os.path import splitext
 
 from list_files.physical_data import PhysicalData
 from list_files.physical_data import PhysicalDataFake
-from .test_filename import Filename
+from test_filename import Filename
 
 class SingleFile:
 
