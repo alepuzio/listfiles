@@ -1,7 +1,19 @@
 import sys
-from  list_files.duplicated_files import Occurrence
+#from  test.tesduplicated_files import Occurrence
 
 
+class Occurrence:
+    '''@overview: class about the occurence of the file'''
+    def __init__(self, new_map_files, new_file_tmp):
+        self.map_files = new_map_files
+        self.file_tmp = new_file_tmp
+
+    def excessive(self):
+        return 1 < len (self.list_files()) #TODO remove magic number
+
+    def list_files(self):
+        list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
+        return list_files 
 
 def test_excessive():
     file_tmp = "file_1.txt"

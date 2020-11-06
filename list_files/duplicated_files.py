@@ -1,6 +1,7 @@
 #import sys
 #sys.path.append('../physical')
 from .single_file import SingleFile
+from tests.test_duplicated_files import Occurrence
 import unittest
 
 class Duplicated:
@@ -22,9 +23,9 @@ class Duplicated:
                 duplicated [filename_tmp] = number_occurrences.list_files()
         #at the end of the cycle
         return duplicated
-
+"""
 class Occurrence:
-    '''@overview: class about the occurence of the file'''
+    @overview: class about the occurence of the file'
     def __init__(self, new_map_files, new_file_tmp):
         self.map_files = new_map_files
         self.file_tmp = new_file_tmp
@@ -35,4 +36,4 @@ class Occurrence:
     def list_files(self):
         list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
         return list_files 
-
+"""
