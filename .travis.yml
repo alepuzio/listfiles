@@ -14,4 +14,4 @@ branches:
   only:
   - master
   - develop
-  - feature_structure_code
+    #- feature_structure_code
