@@ -32,7 +32,13 @@ class PhysicalDataFake:
         return DataFake() 
 
     def path(self):
-        return "{0}_fake/{1}".format(self.dir, self.name)
+        return "{0}_fake/{1}".format(self.dir, self.name )
+
+    def __repr__(self):
+        return "PhysicalDataFake:{0}-{1}".format(self.name, self.dir)
+    
+    def __str__(self):
+        return "PhysicalDataFake:{0}-{1};{2}".format(self.dir, self.name, self.data())
 
 class DataFake:
 
@@ -52,19 +58,24 @@ class DataFake:
         return 1
 
     def st_uid(self):
-        return 0
+        return 2
 
     def st_gid(self):
-        return 0
+        return 3
 
     def st_size(self):
-        return 0, 
+        return 4
     
     def st_atime(self):
         return 1599579491
 
     def st_mtime(self):
-        return 1599579491
+        return 1599579492
 
     def st_ctime(self):
-        return 1599579491
+        return 1599579493
+    
+    def __repr__(self):
+        return "DataFake-static-data"
+
+

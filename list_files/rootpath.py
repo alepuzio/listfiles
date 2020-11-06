@@ -1,7 +1,7 @@
 import sys
 import os
-from .single_file import PhysicalData
-from .single_file import SingleFile
+from tests.test_single_file import PhysicalData
+from tests.test_single_file import SingleFile
 
 
 class Rootpath:

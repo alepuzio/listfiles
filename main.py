@@ -1,10 +1,10 @@
 import sys
 
-from logical.duplicated_files import Duplicated
-from physical.rootpath import Rootpath
-from report.report_data import MapReport
-from report.report_data import Report
-from report.report_name import ReportName
+from list_files.duplicated_files import Duplicated
+from list_files.rootpath import Rootpath
+from list_files.report_data import MapReport
+from list_files.report_data import Report
+from list_files.report_name import ReportName
 
 
 def main():
