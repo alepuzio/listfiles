@@ -24,3 +24,9 @@ class Duplicated:
                 duplicated [filenameTmp] = numberOccurrences.list_files()
         #at the end of the cycle
         return duplicated
+
+    def __repr__(self):
+        return "Duplicated.repr:{0}".format( str ( self.listFiles) )
+
+    def __str__(self):
+        return "Duplicated:{0}:{0}".format( str ( self.listFiles) )

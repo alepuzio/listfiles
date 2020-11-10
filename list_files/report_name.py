@@ -18,6 +18,12 @@ class ReportName:
         '''@return the name of final report file'''
         return "report-all-{0}.{1}".format( self.time(), self.extension )#TODO crete class decorator
 
-    
     def time(self):
         return  datetime.datetime.now().strftime(self.DATE_FORMAT)#TODO class ad hoc
+        
+    def __repr__(self):
+        return "ReportName.repr:{0};{1}".format( self.extension , self.DATE_FORMAT )
+
+    def __str__(self):
+        return "ReportName:{0};{1}".format( self.extension , self.DATE_FORMAT )
+

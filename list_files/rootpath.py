@@ -50,5 +50,8 @@ class Rootpath:
                 else:
                     pass
 
+    def __repr__(self):
+        return "Rootpath.repr:{0}".format( str ( self.root_path) )
 
-
+    def __str__(self):
+        return "Rootpath:{0}:{0}".format( str ( self.root_path) )

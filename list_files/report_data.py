@@ -60,6 +60,11 @@ class Report:
         print("All the {0} rows have been written".format ( len(readfiles) ) )
 
 
+    def __repr__(self):
+        return "Report.repr:{0}".format( self.name )
+
+    def __str__(self):
+        return "Report:{0}:".format( self.name )
 
 class MapReport:
     """@overview: this class print the report of a list of files in CSV format 
@@ -108,4 +113,9 @@ class MapReport:
 
         self.origin.end(readfiles.keys())
 
+    def __repr__(self):
+        return "MapReport.repr:{0}".format( str( self.origin) )
+
+    def __str__(self):
+        return "MapReport:{0}:".format( str( self.origin) )
 

@@ -1,6 +1,4 @@
 import sys
-#from  test.tesduplicated_files import Occurrence
-
 
 class Occurrence:
     '''@overview: class about the occurence of the file'''
@@ -17,6 +15,12 @@ class Occurrence:
         list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
         return list_files 
 
+    def __repr__(self):
+        return "Occurrence.repr:{0};{1}".format( str ( self.map_files) , str( self.file_tmp) )
+
+    def __str__(self):
+        return "Occurrence:{0};{1}".format( str ( self.map_files) , str( self.file_tmp) )
+        
 def test_excessive():
     file_tmp = "file_1.txt"
     map_file = {

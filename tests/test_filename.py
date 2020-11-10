@@ -6,7 +6,6 @@ from list_files.physical_data import PhysicalData
 from list_files.physical_data import PhysicalDataFake
 
 
-
 class Filename:
     """
     class about the filename of a file
@@ -49,14 +48,14 @@ class Filename:
     def __lt__(self, other):
         return self.name() < other.name()
 
-    def __str__(self):
-        return "Filename:{0}.{1}".format(self.name(), self.extension())
-
     def __eq__(self, other):
         return self.name() == self.name() and self.extension() == self.extension()
 
     def __repr__(self):
         return "Filename.repr:{0}.{1}".format(self.name(), self.extension())
+
+    def __str__(self):
+        return "Filename:{0}.{1}".format(self.name(), self.extension())
 
 class SeparationDirectory:
     """
@@ -83,6 +82,12 @@ class SeparationDirectory:
             print ("SeparationDirectory.split() access first element: {0}".format( str ( self.list_subdirectory) ) )
             raise
         return directory
+
+    def __repr__(self):
+        return "SeparationDirectory.repr:{0}".format(str ( self.list_subdirectory))
+
+    def __str__(self):
+        return "SeparationDirectory:{0}".format( str ( self.list_subdirectory))  
         
 """
 Test area

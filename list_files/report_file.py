@@ -20,6 +20,12 @@ class RowCSV:
         data  = (filename , str( self.single_file.dimension () ), self.time(), "\n")
         return ";".join ( data ) #TODO move in a decorator
 
+    def __repr__(self):
+        return "RowCSV.repr:{0}".format( str ( self.single_file)  )
+
+    def __str__(self):
+        return "RowCSV:{0}}".format( str ( self.single_file)  )
+
         
 class RowDuplicated:
 
@@ -29,3 +35,9 @@ class RowDuplicated:
     def data(self):
         filename = "{0}{1}{2}.{3}".format(self.origin.single_file.directory(), os.sep, self.origin.single_file.name().name(), self.origin.single_file.name().extension() ) 
         return self.origin.csv( filename )
+
+    def __repr__(self):
+        return "RowDuplicated.repr:{0}".format( str ( self.origin)  )
+
+    def __str__(self):
+        return "RowDuplicated:{0}}".format( str ( self.origin)  )
