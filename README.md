@@ -35,7 +35,7 @@ This application build tow report file, by passing an absolute or relative path:
 
 - Python 3.0+
 - pip
-- unittest 
+- pytest 
 
 ### Installing
 
