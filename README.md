@@ -25,13 +25,13 @@ This application build tow report file, by passing an absolute or relative path:
 - Write a report with some filter in input (e.g. only files with a particural extension, only files after a date etc)
 - Write a report with all the documents or images or video 
 - Change the name and url of the Github repository
-- segnare le directory senza elementi, probabilmente avevano prima solo file duplicati
+- Show the directories with no elements 
 
 ### Next
-- correggere stile dei file e delle classi (camelcase invece di trattino)
+- Fix the style of the files and the classes as [PEP8] (https://www.python.org/dev/peps/pep-0008/)
 
 ### Running
-- scrivere file contributing in mio github in listfiles ( https://gist.github.com/PurpleBooth/b24679402957c63ec426/forks)
+- Write the file of _Contributing_ as [this] ( https://gist.github.com/PurpleBooth/b24679402957c63ec426/forks)
 
 ### Past
 - agganciato a travis
