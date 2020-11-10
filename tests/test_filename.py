@@ -28,7 +28,6 @@ class Filename:
         """
         @return the extension of a file
         """
-        #print("Filename.extension")
         return self.prepare()[1]
 
     def prepare(self):
@@ -37,12 +36,14 @@ class Filename:
         """
         list_subdirectory = self.physical.path().split(os.sep)
         list_subdirectory.reverse()
-        print("Filename.prepare len:{0}".format ( len ( str ( list_subdirectory )  ) ) )
-        print("Filename.prepare:{0}".format ( str ( list_subdirectory )  ) )
+        #print("Filename.prepare len:{0}".format ( len ( str ( list_subdirectory )  ) ) )
+        #print("Filename.prepare:{0}".format ( str ( list_subdirectory )  ) )
         #if not "." in list_subdirectory[0]:#TODO move in a defensive decorator
             #raise Exception ("The first element of the list {0} lacks of the dot, please control".format( str(list_subdirectory[0] ) ) )
             #print ("The first element of the list {0} lacks of the dot, please control".format( str(list_subdirectory[0] ) ) )
         result = SeparationDirectory ( list_subdirectory).split()
+        if "" == result:
+            resul="EMPTY-FILE-#TODO-DONT-PUT-IN-LIST"
         return result 
 
     def __lt__(self, other):

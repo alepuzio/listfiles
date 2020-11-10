@@ -30,7 +30,6 @@ class Report:
             nil
         """
         try:
-            #create file
             self.homonym()
             report = open(self.name, "w")#TODO using decorator
             report.write(self.csvLabel())
@@ -43,7 +42,7 @@ class Report:
 
     def csvLabel(self):
         '''@return the summary of CSV file'''
-        return "NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP\n"
+        return "NAME;DIRECTORY;WEIGTH;TIMESTAMP\n"
 
     def writerows (self, readfiles, report):
         """
@@ -105,12 +104,12 @@ class MapReport:
             report: file        final file of report
         """
         for fileToWrite in readfiles.keys():
-            report.write ("File {0}\nREMEMBER TO LEAVE ONE OCCURRENCE\n".format( fileToWrite ))
+            report.write ("\n******File {0}-REMEMBER TO LEAVE ONE OCCURRENCE\n".format( fileToWrite ))
             report.write(self.csvLabel())
-
+            #if 1<len( readfiles[fileToWrite]) 
             for fileDuplicated in readfiles[fileToWrite]:
                 report.write( RowDuplicated( RowCSV( fileDuplicated ) ).data())
-
+        print("Written data")
         self.origin.end(readfiles.keys())
 
     def __repr__(self):

@@ -9,12 +9,13 @@ class Rootpath:
     @overvieww: class of the absolute path of root directory
     """
     def __init__(self, opts):
-        self.root_path = opts[1] #TODO study how to resolve the constants in Python
+        self.rootpath = opts[1] #TODO study how to resolve the constants in Python
 
     def data(self):
-       return str(self.root_path )
+        return str(self.rootpath )
 
     def exists(self):
+        print ("os.path.exists( {0} )".format(self.data()))
         return os.path.exists(self.data())
 
     def files ( self ): #TODO move in class Rootpath
@@ -23,10 +24,7 @@ class Rootpath:
         """
         readfiles = []
         try:
-            #if ( self.exists() ):
-                self.dir(self.data(), readfiles)
-            #else:
-             #   print ( "The directory [{0}] doesn'nt exists".format ( self.data() ) )  
+            self.subdir(self.data(), readfiles)
         except:
             print ( sys.exc_info() )
         print ( "The total number of the read files is {0}".format ( str( len ( readfiles )  ) ) )
@@ -45,16 +43,14 @@ class Rootpath:
             for fileTmp in files:
                 readfiles.append ( SingleFile (  PhysicalData ( fileTmp, os.sep.join ( path ) ) ) ) 
             for directory in dirs:
-                #if "." not i:din directory:#TODO transform in decorator
                 self.subdir(directory, readfiles)
-                #else:
-                #    print ("Directory with . {0}".format  ( directory )) 
 
     def __repr__(self):
-        return "Rootpath.repr:{0}".format( str ( self.root_path) )
+        return "Rootpath.repr:{0}".format( str ( self.rootpath) )
 
     def __str__(self):
-        return "Rootpath:{0}".format( str ( self.root_path) )
+        #return "{0}".format( str ( self.rootpath) )
+        return "Rootpath:{0}".format( str ( self.rootpath) )
 
 
 class OnlyVisible(Rootpath):
@@ -65,7 +61,7 @@ class OnlyVisible(Rootpath):
         self.rootpath = new_rootpath
 
     def data(self):
-        return super().data()
+        return self.rootpath.data()
 
     def exists(self):
         return super().exists()
@@ -83,12 +79,11 @@ class OnlyVisible(Rootpath):
 
 
     def subdir(self, root_path,  readfiles ):
-        if "." in root_path :
+        if "\\." in root_path :
             print ("Directory with . {0}".format  ( directory )) 
         else:
             return self.rootpath.subdir(root_path, readfiles)
             
-
     def __repr__(self):
         return "OnlyVisible.repr:{0}".format( str ( self.rootpath) )
 
