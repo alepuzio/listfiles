@@ -19,10 +19,26 @@ This application build tow report file, by passing an absolute or relative path:
 -- dimsione in byte
 -- date fo creation of last update
 
-## Future features
+## Features
+
+### Future
 - Write a report with some filter in input (e.g. only files with a particural extension, only files after a date etc)
 - Write a report with all the documents or images or video 
 - Change the name and url of the Github repository
+- segnare le directory senza elementi, probabilmente avevano prima solo file duplicati
+
+### Next
+- correggere stile dei file e delle classi (camelcase invece di trattino)
+
+### Running
+- scrivere file contributing in mio github in listfiles ( https://gist.github.com/PurpleBooth/b24679402957c63ec426/forks)
+
+### Past
+- agganciato a travis
+- la directory ha lo stesso nome dell'applicazione, non src
+- mettere in directory src le classi senza unit test
+- spostare le classi nei file di test, così da avere accoppiamento
+
 
 ## Status CI Integration
  
