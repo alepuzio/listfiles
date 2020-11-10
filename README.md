@@ -19,6 +19,20 @@ This application build tow report file, by passing an absolute or relative path:
 -- dimsione in byte
 -- date fo creation of last update
 
+## BugFix
+
+### Future
+ - problem with _IndexError_, not better identified
+
+### Next
+ - the name of the printed file has to join to the extension
+
+### Running
+ - None
+
+### Past
+ - fix the run
+
 ## Features
 
 ### Future
