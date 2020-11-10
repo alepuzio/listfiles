@@ -69,6 +69,6 @@ def test_eq():
 def test_not_eq():
     one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
     two = SingleFile ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
-    assert(one == two)
+    assert(one != two)
 
 
