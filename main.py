@@ -1,6 +1,6 @@
 import sys
 
-from list_files.duplicated_files import Duplicated
+from list_files.duplicated import Duplicated
 from list_files.rootpath import Rootpath
 from list_files.report_data import MapReport
 from list_files.report_data import Report

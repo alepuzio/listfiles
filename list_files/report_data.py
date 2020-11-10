@@ -8,7 +8,8 @@ from .report_file import RowDuplicated
 
 
 class Report:
-    """@overview: this class print the report of a list of files in CSV format 
+    """
+    @overview: this class print the report of a list of files in CSV format 
     """
 
     def __init__(self, new_report_name):
@@ -51,8 +52,8 @@ class Report:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
-        for file1 in readfiles:
-            report.write( RowCSV( file1 ).data())
+        for fileToWrite in readfiles:
+            report.write( RowCSV( fileToWrite ).data())
         self.end(readfiles)
 
     def end(self, readfiles):
@@ -98,12 +99,12 @@ class MapReport:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
-        for file1 in readfiles.keys():
-            report.write ("File {0}\nREMEMBER TO LEAVE ONE OCCURRENCE\n".format( file1 ))
+        for fileToWrite in readfiles.keys():
+            report.write ("File {0}\nREMEMBER TO LEAVE ONE OCCURRENCE\n".format( fileToWrite ))
             report.write(self.csvLabel())
 
-            for file2 in readfiles[file1]:
-                report.write( RowDuplicated( RowCSV( file2 ) ).data())
+            for fileDuplicated in readfiles[fileToWrite]:
+                report.write( RowDuplicated( RowCSV( fileDuplicated ) ).data())
 
         self.origin.end(readfiles.keys())
 

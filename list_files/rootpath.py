@@ -5,7 +5,9 @@ from tests.test_single_file import SingleFile
 
 
 class Rootpath:
-
+    """
+    @overvieww: class of the absolute path of root directory
+    """
     def __init__(self, opts):
         self.root_path = opts[1] #TODO study how to resolve the constants in Python
 
@@ -17,9 +19,7 @@ class Rootpath:
 
     def files ( self ): #TODO move in class Rootpath
         """
-            It read a directory recursavely
-            ----------
-            rootpath: class  absolute path of root directory
+        It read a directory recursavely
         """
         readfiles = []
         try:
@@ -42,9 +42,13 @@ class Rootpath:
         """
         for root, dirs, files in os.walk(root_path) :
             path = root.split(os.sep)
-            for file1 in files:
-                readfiles.append ( SingleFile (  PhysicalData ( file1, os.sep.join ( path ) ) ) ) 
+            for fileTmp in files:
+                readfiles.append ( SingleFile (  PhysicalData ( fileTmp, os.sep.join ( path ) ) ) ) 
             for directory in dirs:
-                self.dir(directory, readfiles)
+                if "." not in directory:#TODO transform in decorator
+                    self.dir(directory, readfiles)
+                else:
+                    pass
+
 
 

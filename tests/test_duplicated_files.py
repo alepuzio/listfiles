@@ -9,9 +9,11 @@ class Occurrence:
         self.file_tmp = new_file_tmp
 
     def excessive(self):
+        #print("Occurrence.excessive")
         return 1 < len (self.list_files()) #TODO remove magic number
 
     def list_files(self):
+        #print("Occurrence.list_files")
         list_files = [k for k,v in self.map_files.items() if v == self.file_tmp ] 
         return list_files 
 

@@ -17,7 +17,9 @@ class SingleFile:
         @return the path of the file
         """
         dirs = self.physical.path().split(os.sep)
+        #print(">SingleFile.directory")
         value =  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
+        #print("<SingleFile.directory")
         return value
 
     def dimension(self):
@@ -38,7 +40,6 @@ class SingleFile:
         """
         return self.filename
     
-
     def __iter__(self):
         return iter(self.name)
 
