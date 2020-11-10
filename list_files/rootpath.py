@@ -2,7 +2,7 @@ import sys
 import os
 from tests.test_single_file import PhysicalData
 from tests.test_single_file import SingleFile
-
+import pytest
 
 class Rootpath:
     """
@@ -23,17 +23,17 @@ class Rootpath:
         """
         readfiles = []
         try:
-            if ( self.exists() ):
+            #if ( self.exists() ):
                 self.dir(self.data(), readfiles)
-            else:
-                print ( "The directory [{0}] doesn'nt exists".format ( self.data() ) )  
+            #else:
+             #   print ( "The directory [{0}] doesn'nt exists".format ( self.data() ) )  
         except:
             print ( sys.exc_info() )
-        print ("The total number of the read files is {0}".format ( str( len ( readfiles )  ) ) )
+        print ( "The total number of the read files is {0}".format ( str( len ( readfiles )  ) ) )
         return readfiles;
 
 
-    def dir(self, root_path,  readfiles ):
+    def subdir(self, root_path,  readfiles ):
         """
             It traverses root directory, and list directories as dirs and files as files
             ----------
@@ -45,13 +45,58 @@ class Rootpath:
             for fileTmp in files:
                 readfiles.append ( SingleFile (  PhysicalData ( fileTmp, os.sep.join ( path ) ) ) ) 
             for directory in dirs:
-                if "." not in directory:#TODO transform in decorator
-                    self.dir(directory, readfiles)
-                else:
-                    pass
+                #if "." not i:din directory:#TODO transform in decorator
+                self.subdir(directory, readfiles)
+                #else:
+                #    print ("Directory with . {0}".format  ( directory )) 
 
     def __repr__(self):
         return "Rootpath.repr:{0}".format( str ( self.root_path) )
 
     def __str__(self):
-        return "Rootpath:{0}:{0}".format( str ( self.root_path) )
+        return "Rootpath:{0}".format( str ( self.root_path) )
+
+
+class OnlyVisible(Rootpath):
+    """
+    It reads only visible directory
+    """
+    def __init__(self, new_rootpath):
+        self.rootpath = new_rootpath
+
+    def data(self):
+        return super().data()
+
+    def exists(self):
+        return super().exists()
+
+    def files ( self ): #TODO move in class Rootpath
+        readfiles = []
+        try:
+            if ( self.exists() ):
+                readfiles = self.rootpath.files()
+            else:
+                print ( "The directory [{0}] doesn'nt exists".format ( self.data() ) )  
+        except:
+            print ( sys.exc_info() )
+        return readfiles;
+
+
+    def subdir(self, root_path,  readfiles ):
+        if "." in root_path :
+            print ("Directory with . {0}".format  ( directory )) 
+        else:
+            return self.rootpath.subdir(root_path, readfiles)
+            
+
+    def __repr__(self):
+        return "OnlyVisible.repr:{0}".format( str ( self.rootpath) )
+
+    def __str__(self):
+        return "OnlyVisible:{0}".format( str ( self.rootpath) )
+
+
+def test_dot_in_path():
+    path = "C:\\Users\\apuzielli\\Documents\\personale\\mio-github\\.metadata\\.plugins\\org.jboss.tools.central\\proxyWizards\\1596464026525\\.rcache\\.orphans"
+    result = ( "."  in path)
+    assert True == result
