@@ -8,7 +8,8 @@ from .report_file import RowDuplicated
 
 
 class Report:
-    """@overview: this class print the report of a list of files in CSV format 
+    """
+    @overview: this class print the report of a list of files in CSV format 
     """
 
     def __init__(self, new_report_name):
@@ -29,7 +30,6 @@ class Report:
             nil
         """
         try:
-            #create file
             self.homonym()
             report = open(self.name, "w")#TODO using decorator
             report.write(self.csvLabel())
@@ -42,7 +42,7 @@ class Report:
 
     def csvLabel(self):
         '''@return the summary of CSV file'''
-        return "NAME;DIRECTORY;EXTENSION;WEIGTH;TIMESTAMP\n"
+        return "NAME;DIRECTORY;WEIGTH;TIMESTAMP\n"
 
     def writerows (self, readfiles, report):
         """
@@ -51,14 +51,19 @@ class Report:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
-        for file1 in readfiles:
-            report.write( RowCSV( file1 ).data())
+        for fileToWrite in readfiles:
+            report.write( RowCSV( fileToWrite ).data())
         self.end(readfiles)
 
     def end(self, readfiles):
         print("All the {0} rows have been written".format ( len(readfiles) ) )
 
 
+    def __repr__(self):
+        return "Report.repr:{0}".format( self.name )
+
+    def __str__(self):
+        return "Report:{0}:".format( self.name )
 
 class MapReport:
     """@overview: this class print the report of a list of files in CSV format 
@@ -98,13 +103,18 @@ class MapReport:
             readfiles: list    list of SingleFile in csv form
             report: file        final file of report
         """
-        for file1 in readfiles.keys():
-            report.write ("File {0}\nREMEMBER TO LEAVE ONE OCCURRENCE\n".format( file1 ))
+        for fileToWrite in readfiles.keys():
+            report.write ("\n******File {0}-REMEMBER TO LEAVE ONE OCCURRENCE\n".format( fileToWrite ))
             report.write(self.csvLabel())
-
-            for file2 in readfiles[file1]:
-                report.write( RowDuplicated( RowCSV( file2 ) ).data())
-
+            #if 1<len( readfiles[fileToWrite]) 
+            for fileDuplicated in readfiles[fileToWrite]:
+                report.write( RowDuplicated( RowCSV( fileDuplicated ) ).data())
+        print("Written data")
         self.origin.end(readfiles.keys())
 
+    def __repr__(self):
+        return "MapReport.repr:{0}".format( str( self.origin) )
+
+    def __str__(self):
+        return "MapReport:{0}:".format( str( self.origin) )
 

@@ -17,7 +17,9 @@ class SingleFile:
         @return the path of the file
         """
         dirs = self.physical.path().split(os.sep)
+        #print(">SingleFile.directory")
         value =  str( os.sep.join(dirs[0:len(dirs) -1 ] ) )
+        #print("<SingleFile.directory")
         return value
 
     def dimension(self):
@@ -38,7 +40,6 @@ class SingleFile:
         """
         return self.filename
     
-
     def __iter__(self):
         return iter(self.name)
 
@@ -55,20 +56,19 @@ class SingleFile:
         return "SingleFile:{0};{1}-{2}".format ( self.name().name(), self.name().extension(), str(self.dimension()) )
 
     def __repr__(self):
-        return "SingleFile:{0};{1}".format (self.physical, self.name() )
+        return "SingleFile:{0};{1}".format (self.physical, self.filename)
 
-class TestSingleFile (unittest.TestCase):
 
-    def test_eq(self):
-        one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
-        two = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
-        print (one) 
-        print (two)
-        self.assertEqual(one.name(), two.name())
+def test_eq():
+    one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+    two = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+    print (one) 
+    print (two)
+    assert(one.name() == two.name())
 
-    def test_not_eq(self):
-        one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
-        two = SingleFile ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
-        self.assertNotEqual(one, two)
+def test_not_eq():
+    one = SingleFile ( PhysicalDataFake( "nome.txt", "C:\\path\\") )
+    two = SingleFile ( PhysicalDataFake( "nome1.txt", "C:\\path\\") )
+    assert(one != two)
 
 

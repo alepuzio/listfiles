@@ -15,11 +15,17 @@ class Duplicated:
         """
         mapFiles =  {}
         for fileTmp in self.listFiles:
-            map_files[fileTmp] = fileTmp.name().name() 
+            mapFiles[fileTmp] = fileTmp.name().name() 
         duplicated = {}
         for filenameTmp in set(mapFiles.values()) : #TODO translate in functional programming with lambda syntax
             numberOccurrences = Occurrence (mapFiles, filenameTmp ) 
             if numberOccurrences.excessive(): 
-                duplicated [filenameTmp] = numberOccurrences.listFiles()
+                duplicated [filenameTmp] = numberOccurrences.list_files()
         #at the end of the cycle
         return duplicated
+
+    def __repr__(self):
+        return "Duplicated.repr:{0}".format( str ( self.listFiles) )
+
+    def __str__(self):
+        return "Duplicated:{0}:{0}".format( str ( self.listFiles) )

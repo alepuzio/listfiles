@@ -22,23 +22,35 @@ class PhysicalData:
     def __hash__(self):
         return hash(self.directory) * 10 + hash (self.currentfile)
 
+    def __repr__(self):
+        return "PhysicalData.repr:{0};{1}".format( self.directory , self.currentfile)
+
+    def __str__(self):
+        return "PhysicalData:{0};{1}".format( self.directory , self.currentfile)
+
 class PhysicalDataFake:
 
     def __init__(self, new_current, new_directory):
         self.name = new_current
-        self.dir = new_directory
+        self.directory = new_directory
 
     def data(self): 
         return DataFake() 
 
     def path(self):
-        return "{0}_fake/{1}".format(self.dir, self.name )
+        return "{0}_fake/{1}".format(self.directory, self.name )
 
     def __repr__(self):
-        return "PhysicalDataFake:{0}-{1}".format(self.name, self.dir)
+        return "PhysicalDataFake:{0}-{1}".format(self.name, self.directory)
     
     def __str__(self):
-        return "PhysicalDataFake:{0}-{1};{2}".format(self.dir, self.name, self.data())
+        return "PhysicalDataFake:{0}-{1};{2}".format(self.directory, self.name, self.data())
+
+    def __repr__(self):
+        return "PhysicalDataFake.repr:{0};{1}".format( self.name , self.directory)
+
+    def __str__(self):
+        return "PhysicalDataFake:{0};{1}".format( self.name , self.directory)
 
 class DataFake:
 
@@ -76,6 +88,9 @@ class DataFake:
         return 1599579493
     
     def __repr__(self):
+        return "DataFake-static-data"
+
+    def __str__(self):
         return "DataFake-static-data"
 
 
