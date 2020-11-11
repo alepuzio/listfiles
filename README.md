@@ -23,9 +23,10 @@ This application build tow report file, by passing an absolute or relative path:
 
 ### Future
  - problem with _IndexError_, not better identified
+ - the name of the printed file has to join to the extension
 
 ### Next
- - the name of the printed file has to join to the extension
+ - The input arguments have to be validated before the elaboration
 
 ### Running
  - None
