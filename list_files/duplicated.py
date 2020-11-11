@@ -13,7 +13,6 @@ class Duplicated:
         """
         @return the map<SingleFile, list_of_files_duplicated_with_same_filename>
         """
-        print("Duplicated.files")
         mapFiles =  {}
         for fileTmp in self.listFiles:
             mapFiles[fileTmp] = fileTmp.name().name() 
