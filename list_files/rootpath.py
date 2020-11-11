@@ -15,7 +15,6 @@ class Rootpath:
         return str(self.rootpath )
 
     def exists(self):
-        print ("os.path.exists( {0} )".format(self.data()))
         return os.path.exists(self.data())
 
     def files ( self ): #TODO move in class Rootpath
@@ -80,7 +79,7 @@ class OnlyVisible(Rootpath):
 
     def subdir(self, root_path,  readfiles ):
         if "\\." in root_path :
-            print ("Directory with . {0}".format  ( directory )) 
+            print ("Directory with dot (.), then it's hidden: {0}".format  ( directory )) 
         else:
             return self.rootpath.subdir(root_path, readfiles)
             
