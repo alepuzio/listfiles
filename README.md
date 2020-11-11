@@ -48,10 +48,10 @@ This application build tow report file, by passing an absolute or relative path:
 - Write the file of _Contributing_ as [this] ( https://gist.github.com/PurpleBooth/b24679402957c63ec426/forks)
 
 ### Past
-- agganciato a travis
-- la directory ha lo stesso nome dell'applicazione, non src
-- mettere in directory src le classi senza unit test
-- spostare le classi nei file di test, così da avere accoppiamento
+- The project is structured for CI in Travis
+- The directory of the source has the same name of the application, not _src_
+- The directory of the source has the classes with no unit test
+- The classes with unit test are moved inside the module of test (an idea of mine to coupling stronger test and source code)
 
 
 ## Status CI Integration
@@ -75,7 +75,7 @@ This application build tow report file, by passing an absolute or relative path:
 
 ## Running the tests
 
- - I use __unitest__ framework . I reserve a __test__ for the integration test
+ - I use __pytest__ framework. In the modul inside __tests__ directory, I put also the classes from typical __src__ directory (I prefer to have class and test in the same class).
  - Every unit test is declared inside the class, because for me test and implementation musto go together (highly coupled)
 
 ### Break down into to end to end tests
@@ -89,13 +89,13 @@ Please read the file [CONTRIBUTING.md](http://github.com/alepuzio/listfiles/CONT
 
 ## Deployment
  
- - Package in PypI 
+ - Package in PyPi
  - Run    __>>> python Main.py $PATH_OF_ROOT_DIRECTORY_
  
 ### Built with:
 
 - [ViM](http://www.vim.org) - one of the best text editor I know
-- [unittest](https://docs.python.org/3/library/unittest.html) - most famous library about the unit testing in Python
+- [pytest](https://pytest.org) - mature and full-featured Python testing tool, more advanced than [unittest](https://docs.python.org/3/library/unittest.html)
 
 ## Contributing
 
