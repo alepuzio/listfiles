@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name = 'report-files',  
-     version = '0.1.0',
+     version = '0.2.2',
      author = "Alessandro Puzielli",
      author_email = "alessandro.puzielli@alepuzio.net",
      description = "It creates one files with some data about every files insidea directory (and sub), and a report abotu duplicated files",
