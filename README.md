@@ -30,7 +30,7 @@ This application builds tow report file, by passing an absolute or relative path
  - The input arguments have to be validated before the elaboration
 
 ### Running
- - None
+ - Report duplicated likes uncorrect
 
 ### Past
  - fix the run
